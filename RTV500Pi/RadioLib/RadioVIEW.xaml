@@ -1,0 +1,35 @@
+﻿<UserControl x:Name="ControlUCTRL"
+    x:Class="RadioLib.RadioVIEW"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:RadioLib"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="735"
+    d:DesignWidth="1467" SizeChanged="ControlUCTRL_SizeChanged" >
+    <UserControl.Resources>
+        <local:FrequencyToCurseurTranslationXConverter x:Key="FrequencyToCurseurTranslationXConverter"/>
+        <local:FrequencyToGridMarginConverter x:Key="FrequencyToGridMarginConverter" CurrentControl="{Binding ElementName=ControlUCTRL, Mode=OneWay}" />
+    </UserControl.Resources>
+
+    <Grid x:Name="LignesGRD" Background="#FFE6E6E6" Margin="{Binding TunePosition, Converter={StaticResource FrequencyToGridMarginConverter}}" >
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <MediaElement Grid.Row="0" Source="{Binding UrlPlayed}" AutoPlay="True"/>
+        <Border Grid.RowSpan="4" Width="15" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" >
+            <Border.RenderTransform>
+                <CompositeTransform TranslateX="{Binding TunePosition, Converter={StaticResource FrequencyToCurseurTranslationXConverter}}"/>
+            </Border.RenderTransform>
+            <Line Y1="0" Y2="1" Stroke="Black" Stretch="Fill"/>
+        </Border>
+        <local:RadiosDisplayUserControl Grid.Row="0" DataContext="{Binding RadiosLW}"/>
+        <local:RadiosDisplayUserControl Grid.Row="1" DataContext="{Binding RadiosMW}"/>
+        <local:RadiosDisplayUserControl Grid.Row="2" DataContext="{Binding RadiosKW}"/>
+        <local:RadiosDisplayUserControl Grid.Row="3" DataContext="{Binding RadiosUKW}"/>
+    </Grid>
+</UserControl>

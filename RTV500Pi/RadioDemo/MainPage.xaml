@@ -1,0 +1,38 @@
+﻿<Page
+    x:Class="RadioDemo.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:RadioDemo"
+    xmlns:RadioLib="using:RadioLib"
+    xmlns:AlxCommonLib="using:AlxCommonLib" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" Loaded="Page_Loaded">
+    <Page.Resources>
+        <AlxCommonLib:ByteToDoubleConverter x:Key="ByteToDoubleConverter"/>
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1.2*"/>
+            <RowDefinition/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Column="1" Grid.Row="0" VerticalAlignment="Bottom">
+            <ToggleButton HorizontalAlignment="Stretch" Content="TA/TB" Checked="ToggleButton_Checked" Unchecked="ToggleButton_Unchecked"/>
+            <RadioLib:WaveBandSelectorVIEW DataContext="{Binding SelectorViewModel}" />
+            <Slider Grid.Column="1" Grid.Row="0" Maximum="200" TickFrequency="10" Value="{Binding RadioViewModel.TunePosition, Converter={StaticResource ByteToDoubleConverter}, Mode=TwoWay}" VerticalAlignment="Bottom" />
+            <TextBlock Text="{Binding RadioViewModel.FrequencyHz}" TextAlignment="Center"/>
+        </StackPanel>
+        <Border Grid.Row="1" Grid.Column="1" BorderThickness="2" BorderBrush="#FFFF4848" >
+            <RadioLib:RadioVIEW Grid.Row="1" Grid.Column="1" DataContext="{Binding RadioViewModel}" />
+        </Border>
+        <Border Grid.Row="2" Grid.Column="1" BorderThickness="2" BorderBrush="#FF8BEC7C">
+            <RadioLib:AudioPlayerUserControl x:Name="AudioPlayerCTRL"/>
+        </Border>
+    </Grid>
+</Page>

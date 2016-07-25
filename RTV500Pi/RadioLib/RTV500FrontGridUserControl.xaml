@@ -1,0 +1,286 @@
+﻿<UserControl
+    x:Class="RadioLib.RTV500FrontGridUserControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:RadioLib"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="264"
+    d:DesignWidth="1600">
+
+    <UserControl.Resources>
+        <Style x:Key="NomStationSTY" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize"  Value="11"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+        <Style x:Key="NomStationPetitSTY" TargetType="TextBlock" BasedOn="{StaticResource NomStationSTY}">
+            <Setter Property="FontSize" Value="9"/>
+        </Style>
+        <Style x:Key="NomStationPetitHautSTY" TargetType="TextBlock" BasedOn="{StaticResource NomStationPetitSTY}">
+            <Setter Property="Padding" Value="0,3,0,0"/>
+        </Style>
+        <Style x:Key="NomStationPetitBasSTY" TargetType="TextBlock" BasedOn="{StaticResource NomStationPetitSTY}">
+            <Setter Property="Padding" Value="0,0,0,3   "/>
+        </Style>
+        <Style x:Key="NombreHertzSTY" TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="Black"/>
+        </Style>
+        <Style x:Key="NombreHertzCondenseSTY" TargetType="TextBlock" BasedOn="{StaticResource NombreHertzSTY}">
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="Padding" Value="0,0,0,3"/>
+        </Style>
+        <Style x:Key="NombreHertzBlancSTY" TargetType="TextBlock" BasedOn="{StaticResource NombreHertzCondenseSTY}">
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style x:Key="NombreHertzBlancCentreSTY" TargetType="TextBlock" BasedOn="{StaticResource NombreHertzBlancSTY}">
+            <Setter Property="TextAlignment" Value="Center"/>
+        </Style>
+        <Style x:Key="LigneBlancheSTY" TargetType="Line">
+            <Setter Property="Fill" Value="White"/>
+            <Setter Property="Stroke" Value="White"/>
+            <Setter Property="X2" Value="1"/>
+            <Setter Property="Stretch" Value="Fill"/>
+            <Setter Property="StrokeThickness" Value="2"/>
+            <Setter Property="Margin" Value="0,1,0,0"/>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="75"/>
+            <ColumnDefinition Width="1360"/>
+            <ColumnDefinition Width="60"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="19"/>
+            <RowDefinition Height="19"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="19"/>
+            <RowDefinition Height="19"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="38"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="10"/>
+        </Grid.RowDefinitions>
+        <Rectangle Grid.Row="0" Grid.ColumnSpan="6" Fill="White"/>
+
+        <Rectangle Grid.Row="1" Grid.ColumnSpan="6" Fill="Black"/>
+        <TextBlock Grid.Row="1" Grid.Column="4" Style="{StaticResource NomStationSTY}" Text="RUNDSPRUCH I-VI"/>
+        <TextBlock Grid.Row="1" Grid.Column="4" Style="{StaticResource NomStationSTY}" Text="PRAHA" Margin="469,0,0,0"/>
+        <TextBlock Grid.Row="1" Grid.Column="4" Style="{StaticResource NomStationSTY}" Text="LAHTI" Margin="565,0,0,0"/>
+        <TextBlock Grid.Row="1" Grid.Column="4" Style="{StaticResource NomStationSTY}" Text="LUXEMBOURG" Margin="646,0,0,0"/>
+        <TextBlock Grid.Row="1" Grid.Column="4" Style="{StaticResource NomStationSTY}" Text="OSLO" Margin="735,0,0,0"/>
+        <TextBlock Grid.Row="1" Grid.Column="4" Style="{StaticResource NomStationSTY}" Text="BBC R.2" Margin="823,0,0,0"/>
+        <TextBlock Grid.Row="1" Grid.Column="4" Style="{StaticResource NomStationSTY}" Text="EUROPA 1" Margin="946,0,0,0"/>
+        <TextBlock Grid.Row="1" Grid.Column="4" Style="{StaticResource NomStationSTY}" Text="FRANCE 1" Margin="1068,0,0,0"/>
+        <TextBlock Grid.Row="1" Grid.Column="4" Style="{StaticResource NomStationSTY}" Text="DLF" Margin="1225,0,0,0"/>
+
+        <Rectangle Grid.Row="2" Grid.ColumnSpan="4" Fill="White"/>
+        <Rectangle Grid.Row="2" Grid.Column="1" Fill="Black"/>
+        <TextBlock Grid.Row="2" Grid.Column="1" Text="L" TextAlignment="Center" Foreground="White" FontWeight="ExtraBold"/>
+        <TextBlock Grid.Row="2" Grid.Column="3" Text="kHz" TextAlignment="Center"/>
+
+        <TextBlock Grid.Row="2" Grid.Column="4" Style="{StaticResource NombreHertzSTY}" Text="350" Margin="23,0,0,0"/>
+        <TextBlock Grid.Row="2" Grid.Column="4" Style="{StaticResource NombreHertzCondenseSTY}" Text="VI" Margin="124,0,0,0"/>
+        <TextBlock Grid.Row="2" Grid.Column="4" Style="{StaticResource NombreHertzSTY}" Text="325" Margin="200,0,0,0"/>
+        <TextBlock Grid.Row="2" Grid.Column="4" Style="{StaticResource NombreHertzCondenseSTY}" Text="V" Margin="317,0,0,0"/>
+        <TextBlock Grid.Row="2" Grid.Column="4" Style="{StaticResource NombreHertzSTY}" Text="300" Margin="336,0,0,0"/>
+        <TextBlock Grid.Row="2" Grid.Column="4" Style="{StaticResource NombreHertzSTY}" Text="275" Margin="459,0,0,0"/>
+        <TextBlock Grid.Row="2" Grid.Column="4" Style="{StaticResource NombreHertzCondenseSTY}" Text="IV" Margin="485,0,0,0"/>
+        <TextBlock Grid.Row="2" Grid.Column="4" Style="{StaticResource NombreHertzSTY}" Text="250" Margin="581,0,0,0"/>
+        <TextBlock Grid.Row="2" Grid.Column="4" Style="{StaticResource NombreHertzCondenseSTY}" Text="III" Margin="643,0,0,0"/>
+        <TextBlock Grid.Row="2" Grid.Column="4" Style="{StaticResource NombreHertzSTY}" Text="225" Margin="705,0,0,0"/>
+        <TextBlock Grid.Row="2" Grid.Column="4" Style="{StaticResource NombreHertzCondenseSTY}" Text="II" Margin="800,0,0,0"/>
+        <TextBlock Grid.Row="2" Grid.Column="4" Style="{StaticResource NombreHertzSTY}" Text="200" Margin="826,0,0,0"/>
+        <TextBlock Grid.Row="2" Grid.Column="4" Style="{StaticResource NombreHertzSTY}" Text="175" Margin="988,0,0,0"/>
+        <TextBlock Grid.Row="2" Grid.Column="4" Style="{StaticResource NombreHertzCondenseSTY}" Text="I" Margin="1027,0,0,0"/>
+        <TextBlock Grid.Row="2" Grid.Column="4" Style="{StaticResource NombreHertzSTY}" Text="150" Margin="1233,0,0,0"/>
+        <TextBlock Grid.Row="2" Grid.Column="4" Style="{StaticResource NombreHertzSTY}" Text="•" Margin="1328,0,0,0"/>
+
+        <Rectangle Grid.Row="2" Grid.Column="6" Fill="White"/>
+        <TextBlock Grid.Row="2" Grid.Column="6" Text="L" TextAlignment="Center" FontWeight="ExtraBold"/>
+
+        <Rectangle Grid.Row="3" Grid.RowSpan="2" Grid.ColumnSpan="6" Fill="Black"/>
+        <TextBlock Grid.Row="3" Grid.Column="4" Style="{StaticResource NomStationPetitHautSTY}" Text="MÜNCHEN" Margin="61,0,0,0"/>
+        <TextBlock Grid.Row="4" Grid.Column="4" Style="{StaticResource NomStationPetitBasSTY}" Text="WDR" Margin="95,0,0,0"/>
+        <TextBlock Grid.Row="3" Grid.Column="4" Style="{StaticResource NomStationPetitHautSTY}" Text="VATICANO" Margin="129,0,0,0"/>
+        <TextBlock Grid.Row="4" Grid.Column="4" Style="{StaticResource NomStationPetitBasSTY}" Text="INT.-GLW" Margin="156,0,0,0"/>
+        <TextBlock Grid.Row="3" Grid.Column="4" Style="{StaticResource NomStationPetitHautSTY}" Text="LUXEMBOURG" Margin="191,0,0,0"/>
+        <TextBlock Grid.Row="4" Grid.Column="4" Style="{StaticResource NomStationPetitBasSTY}" Text="SAARBRÜCHEN" Margin="211,0,0,0"/>
+        <TextBlock Grid.Row="3" Grid.Column="4" Style="{StaticResource NomStationPetitHautSTY}" Text="STRASBOURG 2" Margin="299,0,0,0"/>
+        <TextBlock Grid.Row="4" Grid.Column="4" Style="{StaticResource NomStationPetitBasSTY}" Text="DEUTSCHL.FUNK" Margin="306,0,0,0"/>
+        <TextBlock Grid.Row="3" Grid.Column="4" Style="{StaticResource NomStationPetitHautSTY}" Text="BBC R.1" Margin="381,0,0,0"/>
+        <TextBlock Grid.Row="4" Grid.Column="4" Style="{StaticResource NomStationPetitBasSTY}" Text="BORDEAUX 1" Margin="388,0,0,0"/>
+        <TextBlock Grid.Row="3" Grid.Column="4" Style="{StaticResource NomStationPetitHautSTY}" Text="STRASBOURG 1" Margin="422,0,0,0"/>
+        <TextBlock Grid.Row="4" Grid.Column="4" Style="{StaticResource NomStationPetitBasSTY}" Text="AFN-MÜNCHEN" Margin="449,0,0,0"/>
+        <TextBlock Grid.Row="3" Grid.Column="4" Style="{StaticResource NomStationPetitHautSTY}" Text="ÖSTERREICH 1" Margin="517,0,0,0"/>
+        <TextBlock Grid.Row="4" Grid.Column="4" Style="{StaticResource NomStationPetitBasSTY}" Text="SW-FUNK" Margin="538,0,0,0"/>
+        <TextBlock Grid.Row="3" Grid.Column="4" Style="{StaticResource NomStationPetitHautSTY}" Text="NDR/WDR" Margin="592,0,0,0"/>
+        <TextBlock Grid.Row="4" Grid.Column="4" Style="{StaticResource NomStationPetitBasSTY}" Text="BRUXELLES 2" Margin="612,0,0,0"/>
+        <TextBlock Grid.Row="3" Grid.Column="4" Style="{StaticResource NomStationPetitHautSTY}" Text="AFN" Margin="689,0,0,0"/>
+        <TextBlock Grid.Row="4" Grid.Column="4" Style="{StaticResource NomStationPetitBasSTY}" Text="PARIS 1" Margin="687,0,0,0"/>
+        <TextBlock Grid.Row="3" Grid.Column="4" Style="{StaticResource NomStationPetitHautSTY}" Text="NANCY 1" Margin="714,0,0,0"/>
+        <TextBlock Grid.Row="4" Grid.Column="4" Style="{StaticResource NomStationPetitBasSTY}" Text="SW-FUNK" Margin="721,0,0,0"/>
+        <TextBlock Grid.Row="3" Grid.Column="4" Style="{StaticResource NomStationPetitHautSTY}" Text="ÖSTERR.REG." Margin="762,0,0,0"/>
+        <TextBlock Grid.Row="4" Grid.Column="4" Style="{StaticResource NomStationPetitBasSTY}" Text="SOTTENS" Margin="789,0,0,0"/>
+        <TextBlock Grid.Row="3" Grid.Column="4" Style="{StaticResource NomStationPetitHautSTY}" Text="DEUTSCHL.-SENDER" Margin="830,0,0,0"/>
+        <TextBlock Grid.Row="4" Grid.Column="4" Style="{StaticResource NomStationPetitBasSTY}" Text="S.FR.EUROPA" Margin="844,0,0,0"/>
+        <TextBlock Grid.Row="3" Grid.Column="4" Style="{StaticResource NomStationPetitHautSTY}" Text="FIRENZE" Margin="946,0,0,0"/>
+        <TextBlock Grid.Row="4" Grid.Column="4" Style="{StaticResource NomStationPetitBasSTY}" Text="BBC R.3" Margin="959,0,0,0"/>
+        <TextBlock Grid.Row="3" Grid.Column="4" Style="{StaticResource NomStationPetitHautSTY}" Text="AFN-NÜRNBERG" Margin="1007,0,0,0"/>
+        <TextBlock Grid.Row="4" Grid.Column="4" Style="{StaticResource NomStationPetitBasSTY}" Text="LYON 1" Margin="1048,0,0,0"/>
+        <TextBlock Grid.Row="3" Grid.Column="4" Style="{StaticResource NomStationPetitHautSTY}" Text="ÖSTERREICH 1" Margin="1082,0,0,0"/>
+        <TextBlock Grid.Row="4" Grid.Column="4" Style="{StaticResource NomStationPetitBasSTY}" Text="STUTTGART" Margin="1095,1,0,3"/>
+        <TextBlock Grid.Row="3" Grid.Column="4" Style="{StaticResource NomStationPetitHautSTY}" Text="DEUTSCHL.FUNK" Margin="1157,0,0,0"/>
+        <TextBlock Grid.Row="4" Grid.Column="4" Style="{StaticResource NomStationPetitBasSTY}" Text="BUDAPEST" Margin="1198,1,0,3"/>
+
+        <Rectangle Grid.Row="5" Grid.ColumnSpan="4" Fill="White"/>
+        <Rectangle Grid.Row="5" Grid.Column="1" Fill="Black"/>
+        <TextBlock Grid.Row="5" Grid.Column="1" Text="M" TextAlignment="Center" Foreground="White" FontWeight="ExtraBold"/>
+        <TextBlock Grid.Row="5" Grid.Column="3" Text="kHz" TextAlignment="Center"/>
+        <TextBlock Grid.Row="5" Grid.Column="4" Style="{StaticResource NombreHertzSTY}" Text="1600" Margin="74,0,0,0"/>
+        <TextBlock Grid.Row="5" Grid.Column="4" Style="{StaticResource NombreHertzSTY}" Text="1400" Margin="230,0,0,0"/>
+        <TextBlock Grid.Row="5" Grid.Column="4" Style="{StaticResource NombreHertzSTY}" Text="1200" Margin="387,0,0,0"/>
+        <TextBlock Grid.Row="5" Grid.Column="4" Style="{StaticResource NombreHertzSTY}" Text="1000" Margin="557,0,0,0"/>
+        <TextBlock Grid.Row="5" Grid.Column="4" Style="{StaticResource NombreHertzSTY}" Text="800" Margin="758,0,0,0"/>
+        <TextBlock Grid.Row="5" Grid.Column="4" Style="{StaticResource NombreHertzSTY}" Text="700" Margin="887,0,0,0"/>
+        <TextBlock Grid.Row="5" Grid.Column="4" Style="{StaticResource NombreHertzSTY}" Text="600" Margin="1056,0,0,0"/>
+        <TextBlock Grid.Row="5" Grid.Column="4" Style="{StaticResource NombreHertzSTY}" Text="550" Margin="1180,0,0,0"/>
+        <TextBlock Grid.Row="5" Grid.Column="4" Style="{StaticResource NombreHertzSTY}" Text="510" Margin="1319,0,0,0"/>
+
+        <Rectangle Grid.Row="5" Grid.Column="6" Fill="White"/>
+        <TextBlock Grid.Row="5" Grid.Column="6" Text="M" TextAlignment="Center" FontWeight="ExtraBold"/>
+
+        <Rectangle Grid.Row="6" Grid.RowSpan="2" Grid.ColumnSpan="6" Fill="Black"/>
+        <TextBlock Grid.Row="6" Grid.Column="4" Style="{StaticResource NomStationPetitHautSTY}" Text="BBC R.3" Margin="116,0,0,0"/>
+        <TextBlock Grid.Row="7" Grid.Column="4" Style="{StaticResource NomStationPetitBasSTY}" Text="DEUTSCHL.FUNK" Margin="102,0,0,0"/>
+        <TextBlock Grid.Row="6" Grid.Column="4" Style="{StaticResource NomStationPetitHautSTY}" Text="ÖSTERR.REG." Margin="156,0,0,0"/>
+        <TextBlock Grid.Row="7" Grid.Column="4" Style="{StaticResource NomStationPetitBasSTY}" Text="MTE.CARLO" Margin="184,0,0,0"/>
+        <TextBlock Grid.Row="6" Grid.Column="4" Style="{StaticResource NomStationPetitHautSTY}" Text="ÖSTERR.REG." Margin="231,0,0,0"/>
+        <TextBlock Grid.Row="7" Grid.Column="4" Style="{StaticResource NomStationPetitBasSTY}" Text="BREMEN 2" Margin="259,0,0,0"/>
+        <TextBlock Grid.Row="6" Grid.Column="4" Style="{StaticResource NomStationPetitHautSTY}" Text="HILVERSUM 3" Margin="340,0,0,0"/>
+        <TextBlock Grid.Row="7" Grid.Column="4" Style="{StaticResource NomStationPetitBasSTY}" Text="FALUN" Margin="374,0,0,0"/>
+        <TextBlock Grid.Row="6" Grid.Column="4" Style="{StaticResource NomStationPetitHautSTY}" Text="HÖRBY" Margin="408,0,0,0"/>
+        <TextBlock Grid.Row="7" Grid.Column="4" Style="{StaticResource NomStationPetitBasSTY}" Text="SÜDD.-RUNDF." Margin="408,0,0,0"/>
+        <TextBlock Grid.Row="6" Grid.Column="4" Style="{StaticResource NomStationPetitHautSTY}" Text="BREMEN 1" Margin="483,0,0,0"/>
+        <TextBlock Grid.Row="7" Grid.Column="4" Style="{StaticResource NomStationPetitBasSTY}" Text="PARIS 2" Margin="497,0,0,0"/>
+        <TextBlock Grid.Row="6" Grid.Column="4" Style="{StaticResource NomStationPetitHautSTY}" Text="HILVERSUM 2" Margin="538,0,0,0"/>
+        <TextBlock Grid.Row="7" Grid.Column="4" Style="{StaticResource NomStationPetitBasSTY}" Text="RIAS-BERLIN" Margin="551,0,0,0"/>
+        <TextBlock Grid.Row="6" Grid.Column="4" Style="{StaticResource NomStationPetitHautSTY}" Text="BBC R.4" Margin="640,0,0,0"/>
+        <TextBlock Grid.Row="7" Grid.Column="4" Style="{StaticResource NomStationPetitBasSTY}" Text="BERLIN" Margin="667,0,0,0"/>
+        <TextBlock Grid.Row="6" Grid.Column="4" Style="{StaticResource NomStationPetitHautSTY}" Text="BUKURESTI" Margin="687,0,0,0"/>
+        <TextBlock Grid.Row="7" Grid.Column="4" Style="{StaticResource NomStationPetitBasSTY}" Text="ROMA 2" Margin="707,0,0,0"/>
+        <TextBlock Grid.Row="6" Grid.Column="4" Style="{StaticResource NomStationPetitHautSTY}" Text="NÜRNBERG" Margin="742,0,0,0"/>
+        <TextBlock Grid.Row="7" Grid.Column="4" Style="{StaticResource NomStationPetitBasSTY}" Text="BURG" Margin="776,0,0,0"/>
+        <TextBlock Grid.Row="6" Grid.Column="4" Style="{StaticResource NomStationPetitHautSTY}" Text="HILVERSUM 1" Margin="803,0,0,0"/>
+        <TextBlock Grid.Row="7" Grid.Column="4" Style="{StaticResource NomStationPetitBasSTY}" Text="RIAS-HOF" Margin="823,0,0,0"/>
+        <TextBlock Grid.Row="6" Grid.Column="4" Style="{StaticResource NomStationPetitHautSTY}" Text="NDR/WDR" Margin="878,0,0,0"/>
+        <TextBlock Grid.Row="7" Grid.Column="4" Style="{StaticResource NomStationPetitBasSTY}" Text="SW-FUNK" Margin="932,0,0,0"/>
+        <TextBlock Grid.Row="6" Grid.Column="4" Style="{StaticResource NomStationPetitHautSTY}" Text="PRAHA" Margin="980,0,0,0"/>
+        <TextBlock Grid.Row="7" Grid.Column="4" Style="{StaticResource NomStationPetitBasSTY}" Text="BRUXELLES 1" Margin="1000,0,0,0"/>
+        <TextBlock Grid.Row="6" Grid.Column="4" Style="{StaticResource NomStationPetitHautSTY}" Text="SUNDSVALL" Margin="1055,0,0,0"/>
+        <TextBlock Grid.Row="7" Grid.Column="4" Style="{StaticResource NomStationPetitBasSTY}" Text="FRANKFURT" Margin="1068,0,0,0"/>
+        <TextBlock Grid.Row="6" Grid.Column="4" Style="{StaticResource NomStationPetitHautSTY}" Text="S.FR.BERLIN" Margin="1123,0,0,0"/>
+        <TextBlock Grid.Row="7" Grid.Column="4" Style="{StaticResource NomStationPetitBasSTY}" Text="MTE.CENERI" Margin="1136,0,0,0"/>
+        <TextBlock Grid.Row="6" Grid.Column="4" Style="{StaticResource NomStationPetitHautSTY}" Text="BEROMÜNSTER" Margin="1225,0,0,0"/>
+        <TextBlock Grid.Row="7" Grid.Column="4" Style="{StaticResource NomStationPetitBasSTY}" Text="BAY.RUNDF." Margin="1266,0,0,0"/>
+
+        <Rectangle Grid.Row="8" Grid.ColumnSpan="4" Fill="White"/>
+        <Rectangle Grid.Row="8" Grid.Column="1" Fill="Black"/>
+        <TextBlock Grid.Row="8" Grid.Column="1" Text="K" TextAlignment="Center" Foreground="White" FontWeight="ExtraBold"/>
+        <TextBlock Grid.Row="8" Grid.Column="3" Text="MHz" TextAlignment="Center"/>
+        <TextBlock Grid.Row="8" Grid.Column="4" Style="{StaticResource NombreHertzSTY}" Text="16" Margin="53,0,0,0"/>
+        <TextBlock Grid.Row="8" Grid.Column="4" Style="{StaticResource NombreHertzSTY}" Text="15" Margin="169,0,0,0"/>
+        <TextBlock Grid.Row="8" Grid.Column="4" Style="{StaticResource NombreHertzSTY}" Text="14" Margin="264,0,0,0"/>
+        <TextBlock Grid.Row="8" Grid.Column="4" Style="{StaticResource NombreHertzSTY}" Text="13" Margin="360,0,0,0"/>
+        <TextBlock Grid.Row="8" Grid.Column="4" Style="{StaticResource NombreHertzSTY}" Text="12" Margin="462,0,0,0"/>
+        <TextBlock Grid.Row="8" Grid.Column="4" Style="{StaticResource NombreHertzSTY}" Text="11" Margin="557,0,0,0"/>
+        <TextBlock Grid.Row="8" Grid.Column="4" Style="{StaticResource NombreHertzSTY}" Text="10" Margin="652,0,0,0"/>
+        <TextBlock Grid.Row="8" Grid.Column="4" Style="{StaticResource NombreHertzSTY}" Text="9" Margin="766,0,0,0"/>
+        <TextBlock Grid.Row="8" Grid.Column="4" Style="{StaticResource NombreHertzSTY}" Text="8" Margin="889,0,0,0"/>
+        <TextBlock Grid.Row="8" Grid.Column="4" Style="{StaticResource NombreHertzSTY}" Text="7" Margin="1052,0,0,0"/>
+        <TextBlock Grid.Row="8" Grid.Column="4" Style="{StaticResource NombreHertzSTY}" Text="6.5" Margin="1148,0,0,0"/>
+        <TextBlock Grid.Row="8" Grid.Column="4" Style="{StaticResource NombreHertzSTY}" Text="6" Margin="1297,0,0,0"/>
+        <TextBlock Grid.Row="8" Grid.Column="4" Text="•" Margin="1328,0,0,0"/>
+        <Rectangle Grid.Row="8" Grid.Column="6" Fill="White"/>
+        <TextBlock Grid.Row="8" Grid.Column="6" Text="K" TextAlignment="Center" FontWeight="ExtraBold"/>
+
+        <Rectangle Grid.Row="9" Grid.ColumnSpan="6" Fill="Black"/>
+        <Grid Grid.Row="9" Grid.Column="4" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="83"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="178"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="264"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="148"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Text="BAND" Style="{StaticResource NombreHertzBlancCentreSTY}" Margin="0,0,4,0"/>
+            <Line Grid.Column="1" Style="{StaticResource LigneBlancheSTY}"/>
+            <TextBlock Grid.Column="2" Text="19m" Style="{StaticResource NombreHertzBlancCentreSTY}" Margin="10,0,10,0"/>
+            <Line Grid.Column="3" Style="{StaticResource LigneBlancheSTY}"/>
+            <TextBlock Grid.Column="4" Text="25m" Style="{StaticResource NombreHertzBlancCentreSTY}" Margin="5,0,5,0"/>
+            <Line Grid.Column="5" Style="{StaticResource LigneBlancheSTY}"/>
+            <TextBlock Grid.Column="6" Text="31m" Style="{StaticResource NombreHertzBlancCentreSTY}" Margin="1,0,1,0"/>
+            <Line Grid.Column="7" Style="{StaticResource LigneBlancheSTY}"/>
+            <TextBlock Grid.Column="8" Text="41m" Style="{StaticResource NombreHertzBlancCentreSTY}" Margin="16,0,16,0"/>
+            <Line Grid.Column="9" Style="{StaticResource LigneBlancheSTY}"/>
+            <TextBlock Grid.Column="10" Text="49m" Style="{StaticResource NombreHertzBlancCentreSTY}" Margin="62,0,62,0"/>
+            <Line Grid.Column="11" Style="{StaticResource LigneBlancheSTY}"/>
+        </Grid>
+
+        <Rectangle Grid.Row="10" Grid.ColumnSpan="4" Fill="White"/>
+        <Rectangle Grid.Row="10" Grid.Column="1" Fill="Black"/>
+        <TextBlock Grid.Row="10" Grid.Column="1" Text="U" TextAlignment="Center" Foreground="White" FontWeight="ExtraBold"/>
+        <TextBlock Grid.Row="10" Grid.Column="3" Text="MHz" TextAlignment="Center"/>
+        <TextBlock Grid.Row="10" Grid.Column="4" Style="{StaticResource NombreHertzSTY}" Text="108" Margin="91,0,0,0"/>
+        <TextBlock Grid.Row="10" Grid.Column="4" Style="{StaticResource NombreHertzSTY}" Text="106" Margin="227,0,0,0"/>
+        <TextBlock Grid.Row="10" Grid.Column="4" Style="{StaticResource NombreHertzSTY}" Text="104" Margin="356,0,0,0"/>
+        <TextBlock Grid.Row="10" Grid.Column="4" Style="{StaticResource NombreHertzSTY}" Text="102" Margin="473,0,0,0"/>
+        <TextBlock Grid.Row="10" Grid.Column="4" Style="{StaticResource NombreHertzSTY}" Text="100" Margin="588,0,0,0"/>
+        <TextBlock Grid.Row="10" Grid.Column="4" Style="{StaticResource NombreHertzSTY}" Text="98" Margin="714,0,0,0"/>
+        <TextBlock Grid.Row="10" Grid.Column="4" Style="{StaticResource NombreHertzSTY}" Text="96" Margin="822,0,0,0"/>
+        <TextBlock Grid.Row="10" Grid.Column="4" Style="{StaticResource NombreHertzSTY}" Text="94" Margin="932,0,0,0"/>
+        <TextBlock Grid.Row="10" Grid.Column="4" Style="{StaticResource NombreHertzSTY}" Text="92" Margin="1040,0,0,0"/>
+        <TextBlock Grid.Row="10" Grid.Column="4" Style="{StaticResource NombreHertzSTY}" Text="90" Margin="1142,0,0,0"/>
+        <TextBlock Grid.Row="10" Grid.Column="4" Style="{StaticResource NombreHertzSTY}" Text="88" Margin="1258,0,0,0"/>
+        <TextBlock Grid.Row="10" Grid.Column="4" Text="•" Margin="1328,0,0,0"/>
+        <Rectangle Grid.Row="10" Grid.Column="6" Fill="White"/>
+        <TextBlock Grid.Row="10" Grid.Column="6" Text="U" TextAlignment="Center" FontWeight="ExtraBold"/>
+
+        <Rectangle Grid.Row="11" Grid.ColumnSpan="7" Fill="Black"/>
+        <TextBlock Grid.Row="11" Grid.Column="4" Style="{StaticResource NombreHertzBlancSTY}" Text="KANAL"/>
+        <TextBlock Grid.Row="11" Grid.Column="4" Style="{StaticResource NombreHertzBlancSTY}" Text="55" Margin="389,0,0,0"/>
+        <TextBlock Grid.Row="11" Grid.Column="4" Style="{StaticResource NombreHertzBlancSTY}" Text="50" Margin="477,0,0,0"/>
+        <TextBlock Grid.Row="11" Grid.Column="4" Style="{StaticResource NombreHertzBlancSTY}" Text="45" Margin="565,0,0,0"/>
+        <TextBlock Grid.Row="11" Grid.Column="4" Style="{StaticResource NombreHertzBlancSTY}" Text="40" Margin="653,0,0,0"/>
+        <TextBlock Grid.Row="11" Grid.Column="4" Style="{StaticResource NombreHertzBlancSTY}" Text="35" Margin="735,0,0,0"/>
+        <TextBlock Grid.Row="11" Grid.Column="4" Style="{StaticResource NombreHertzBlancSTY}" Text="30" Margin="823,0,0,0"/>
+        <TextBlock Grid.Row="11" Grid.Column="4" Style="{StaticResource NombreHertzBlancSTY}" Text="25" Margin="899,0,0,0"/>
+        <TextBlock Grid.Row="11" Grid.Column="4" Style="{StaticResource NombreHertzBlancSTY}" Text="20" Margin="987,0,0,0"/>
+        <TextBlock Grid.Row="11" Grid.Column="4" Style="{StaticResource NombreHertzBlancSTY}" Text="15" Margin="1062,0,0,0"/>
+        <TextBlock Grid.Row="11" Grid.Column="4" Style="{StaticResource NombreHertzBlancSTY}" Text="10" Margin="1142,0,0,0"/>
+        <TextBlock Grid.Row="11" Grid.Column="4" Style="{StaticResource NombreHertzBlancSTY}" Text="5" Margin="1237,0,0,0"/>
+        <TextBlock Grid.Row="11" Grid.Column="4" Style="{StaticResource NombreHertzBlancSTY}" Text="2" Margin="1284,0,0,0"/>
+
+        <Rectangle Grid.Row="12" Grid.ColumnSpan="7" Fill="White"/>
+    </Grid>
+
+</UserControl>
