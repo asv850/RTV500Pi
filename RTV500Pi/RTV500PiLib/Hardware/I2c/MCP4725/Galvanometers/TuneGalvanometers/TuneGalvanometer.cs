@@ -10,7 +10,7 @@ namespace RTV500PiLib.Hardware.I2c.MCP4725.Galvanometers.TuneGalvanometers
         private double _value = 0;
         private bool _enabled = true;
         private ushort ValueTo128Bits(double value)     { return (ushort)(12.4009324 * Math.Pow(value, 4) - 81.212121 * Math.Pow(value, 3) + 210.51282 * Math.Pow(value, 2) + 227.202797 * value + 4.89510489); }
-        private async void UpdateDac()
+        private void UpdateDac()
         {
             if (_dac.IsInitialized)
                 _dac.SetValues(ValueTo128Bits(_value), _enabled ? PowerDownModes.pwdNormal : PowerDownModes.pwd500K);
