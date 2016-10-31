@@ -30,12 +30,17 @@ namespace RTV500Pi
     public sealed partial class MainPage : Page
     {
         private Radio _radio = null;
+        private static readonly string CSV_FREQ_MAP_FILENAME = "RadioFreqMap.csv";
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
             _radio = new Radio();
-            Radio.AddParisRadios(_radio, WaveBand.wbUKW);
-            Radio.AddAddictRadios(_radio, WaveBand.wbKW);
-            Radio.AddFrenchLWRadios(_radio);
+            if (!await _radio.LoadRadioStationsFromCsvFile(CSV_FREQ_MAP_FILENAME))
+            {
+                Radio.AddParisRadios(_radio, WaveBand.wbUKW);
+                Radio.AddAddictRadios(_radio, WaveBand.wbKW);
+                Radio.AddFrenchLWRadios(_radio);
+                _radio.CreateRadioStationsCsvFile(CSV_FREQ_MAP_FILENAME);
+            }
             await _radio.Initialize(new string[4] { "74934_radio-static-short-wave-choppy.wav", "74260_am-radio-noise.wav", "316808_am-static-1.wav", "pink-noise.wav" });
             RadioViewModel = new RadioVM(_radio);
 

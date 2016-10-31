@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.Media.Playback;
@@ -20,6 +23,8 @@ namespace RadioLib
     public enum WaveBand { wbNone, wbLW, wbMW, wbKW, wbUKW };
     public class Radio
     {
+        private static readonly char CSV_SEPARATOR = ';';
+        private static readonly char CSV_RECEIPVALUES_SEPARATOR = '|';
         private Collection<RadioStation>[] _radios = new Collection<RadioStation>[4] { new Collection<RadioStation>(), new Collection<RadioStation>(), new Collection<RadioStation>(), new Collection<RadioStation>() };
         private RadioPosition[,] _tabRadios = new RadioPosition[4, 201];
         private RadioStation _currentStation = null;
@@ -73,6 +78,24 @@ namespace RadioLib
             if (newFreq) OnTuneChanged?.Invoke();
             if (newSource) OnBandChanged?.Invoke();
         }
+        private void LoadRadioStationFromCsvLine(string line)
+        {
+            try
+            {
+                string[] tabline = line.Split(CSV_SEPARATOR);
+                AddStation(tabline[0], (WaveBand)Convert.ToByte(tabline[1]), Convert.ToByte(tabline[2]), tabline[3], Convert.ToBoolean(tabline[4]), Convert.ToByte(tabline[5]), ConvertReceipValuesFromString(tabline[6]));
+            }
+            catch { }
+        }
+        private double[] ConvertReceipValuesFromString(string values)
+        {
+            string[] tabValues = values.Split(CSV_RECEIPVALUES_SEPARATOR);
+            double[] res = new double[tabValues.Length];
+            for (byte i = 0; i < tabValues.Length; i++)
+                res[i] = Convert.ToDouble(tabValues[i]);
+            return res;
+        }
+        private string ConvertReceipValuesToString(double[] receipValues)        { return string.Join(CSV_RECEIPVALUES_SEPARATOR.ToString(), receipValues); }
 
         public byte TunePosition
         {
@@ -134,6 +157,47 @@ namespace RadioLib
             }
             return res;
         }
+        public async void CreateRadioStationsCsvFile(string fileName)
+        {
+            List<string> lines = new List<string>();
+            lines.Add("Name" + CSV_SEPARATOR + "WaveBand" + CSV_SEPARATOR + "Frequency" + CSV_SEPARATOR + "Address" + CSV_SEPARATOR + "IsStereo" + CSV_SEPARATOR + "DisplayRow" + CSV_SEPARATOR + "ReceipValues");
+            for (byte band = 1; band < 5; band++)
+                foreach (RadioStation rStation in _radios[band - 1])
+                    lines.Add(rStation.Name + CSV_SEPARATOR + band.ToString() + CSV_SEPARATOR + rStation.Frequency.ToString() + CSV_SEPARATOR + rStation.WebAddress + CSV_SEPARATOR + rStation.Stereo.ToString()+ CSV_SEPARATOR + rStation.DisplayRow.ToString() + CSV_SEPARATOR + ConvertReceipValuesToString(rStation.ReceipValues));
+            StorageFile freqMapCsvFile = await KnownFolders.MusicLibrary.CreateFileAsync(fileName, CreationCollisionOption.FailIfExists);
+            await FileIO.WriteLinesAsync(freqMapCsvFile, lines);
+        }
+        public async Task<bool> LoadRadioStationsFromCsvFile(string fileName)
+        {
+            try
+            {
+                StorageFile freqMapCsv = await KnownFolders.MusicLibrary.GetFileAsync(fileName);
+                if (freqMapCsv != null)
+                {
+                    try
+                    {
+                        IList<string> lines = await Windows.Storage.FileIO.ReadLinesAsync(freqMapCsv);
+                        bool firstLine = true;
+                        foreach (string line in lines)
+                            if (firstLine)
+                                firstLine = false;
+                            else
+                                LoadRadioStationFromCsvLine(line);
+                        return true;
+                    }
+                    catch
+                    {
+                        return false;
+                    }
+                }
+                else
+                    return false;
+            }
+            catch
+            {
+                return false;
+            }
+        }
 
         public event MediaPlayerStateChange OnMediaPlayerStateChanged;
         public event TuneChange OnTuneChanged;
@@ -142,13 +206,13 @@ namespace RadioLib
 
         public static void AddParisRadios(Radio radio, WaveBand band)
         {
-            radio.AddStation("France Inter", band, 190, "http://audio.scdn.arkena.com/11008/franceinter-midfi128.mp3", true, 0, new double[] { 1, 2, 3, 4, 3, 2, 1 });
+            radio.AddStation("France Inter", band, 190, "http://direct.franceinter.fr/live/franceinter-midfi.mp3", true, 0, new double[] { 1, 2, 3, 4, 3, 2, 1 });
             radio.AddStation("RFI", band, 180, "http://rfi-monde-64k.scdn.arkena.com/rfimonde.mp3", true, 0, new double[] { 1, 2, 3, 4, 3, 2, 1 });
             radio.AddStation("Nostalgie", band, 169, "http://cdn.nrjaudio.fm/audio1/fr/30601/mp3_128.mp3?origine=listenlive", true, 0, new double[] { 1, 2, 3, 4, 3, 2, 1 });
             radio.AddStation("Chérie FM", band, 162, "http://cdn.nrjaudio.fm/audio1/fr/30201/mp3_128.mp3?origine=listenlive", true, 1, new double[] { 1, 4, 3, 2, 1 });
-            radio.AddStation("France Musique", band, 158, "http://audio.scdn.arkena.com/11012/francemusique-midfi128.mp3", true, 0, new double[] { 2, 4.5, 4, 2 });
-            radio.AddStation("Le Mouv'", band, 155, "http://audio.scdn.arkena.com/11014/mouv-midfi128.mp3", true, 2, new double[] { 1, 2, 3, 4, 2 });
-            radio.AddStation("France Culture", band, 144, "http://audio.scdn.arkena.com/11010/franceculture-midfi128.mp3", true, 0, new double[] { 1, 2, 3, 4, 3, 2, 1 });
+            radio.AddStation("France Musique", band, 158, "http://direct.francemusique.fr/live/francemusique-midfi.mp3", true, 0, new double[] { 2, 4.5, 4, 2 });
+            radio.AddStation("Le Mouv'", band, 155, "http://direct.mouv.fr/live/mouv-midfi.mp3", true, 2, new double[] { 1, 2, 3, 4, 2 });
+            radio.AddStation("France Culture", band, 144, "http://direct.franceculture.fr/live/franceculture-midfi.mp3", true, 0, new double[] { 1, 2, 3, 4, 3, 2, 1 });
             radio.AddStation("Skyrock", band, 124, "http://icecast.skyrock.net/s/natio_aac_64k?tvr_name=yourplayer&tvr_section1=64", true, 0, new double[] { 2, 4, 3, 2, 1 });
             radio.AddStation("BFM", band, 121, "http://bfmbusiness.scdn.arkena.com/bfmbusiness.mp3", true, 1, new double[] { 1, 2, 3, 4, 2 });
             radio.AddStation("Rires & Chansons", band, 113, "http://cdn.nrjaudio.fm/audio1/fr/30401/mp3_128.mp3?origine=listenlive", true, 0, new double[] { 1, 2, 3, 4, 3, 2, 1 });
@@ -163,10 +227,10 @@ namespace RadioLib
             radio.AddStation("RTL", band, 53, "http://ais.rtl.fr:80/rtl-1-44-128", true, 0, new double[] { 2, 4, 3, 2 });
             radio.AddStation("Europe 1", band, 50, "http://mp3lg4.tdf-cdn.com/9240/lag_180945.mp3", true, 1, new double[] { 2, 4, 2 });
             radio.AddStation("FIP", band, 46, "http://audio.scdn.arkena.com/11016/fip-midfi128.mp3", true, 0, new double[] { 2, 4, 3, 2 });
-            radio.AddStation("France Info", band, 42, "http://audio.scdn.arkena.com/11006/franceinfo-midfi128.mp3", false, 1, new double[] { 2, 4, 3, 2 });
+            radio.AddStation("France Info", band, 42, "http://direct.franceinfo.fr/live/franceinfo-midfi.mp3", false, 1, new double[] { 2, 4, 3, 2 });
             radio.AddStation("RTL 2", band, 38, "http://ais.rtl.fr:80/rtl2-1-44-128", true, 0, new double[] { 1, 2, 3, 4, 3, 2 });
             radio.AddStation("Beur FM", band, 30, "http://ice14.infomaniak.ch:80/beurfm-high.mp3", true, 0, new double[] { 2, 4, 3, 2, 1 });
-            radio.AddStation("France Bleu", band, 26, "http://audio.scdn.arkena.com/11719/fb1071-midfi128.mp3", true, 1, new double[] { 1, 2, 3, 4, 3, 2 });
+            radio.AddStation("France Bleu", band, 26, "http://direct.francebleu.fr/live/fb1071-midfi.mp3", true, 1, new double[] { 1, 2, 3, 4, 3, 2 });
             radio.AddStation("Autoroute Info", band, 20, "http://media.autorouteinfo.fr:8000/direct_sud.mp3", true, 0, new double[] { 1, 2, 3, 4, 3, 2, 1 });
         }
         public static void AddAddictRadios(Radio radio, WaveBand band)
@@ -179,7 +243,7 @@ namespace RadioLib
         }
         public static void AddFrenchLWRadios(Radio radio)
         {
-            radio.AddStation("FRANCE INTER", WaveBand.wbLW, 163, "http://audio.scdn.arkena.com/11008/franceinter-midfi128.mp3", false, 0, new double[] { 1,2,3,4,4.5,5,4.5,4,3,2,1});
+            radio.AddStation("FRANCE INTER", WaveBand.wbLW, 163, "http://direct.franceinter.fr/live/franceinter-midfi.mp3", false, 0, new double[] { 1,2,3,4,4.5,5,4.5,4,3,2,1});
             radio.AddStation("EUROPE 1", WaveBand.wbLW, 141, "http://mp3lg4.tdf-cdn.com/9240/lag_180945.mp3", false, 0, new double[] { 1, 2, 3, 4, 4.5, 5, 4.5, 4, 3, 2, 1 });
             radio.AddStation("RADIO MONTE CARLO", WaveBand.wbLW, 114, "http://rmc.scdn.arkena.com/rmc.mp3", false, 1, new double[] { 1, 2, 3, 4, 4.5, 5, 4.5, 4, 3, 2, 1 });
             radio.AddStation("LUXEMBOURG", WaveBand.wbLW, 100, "http://ais.rtl.fr:80/rtl-1-44-128", false, 0, new double[] { 1, 2, 3, 4, 4.5, 5, 4.5, 4, 3, 2, 1 });
